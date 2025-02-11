@@ -5,11 +5,12 @@ import java.util.Arrays;
 public class LinearithmicTime {
     public static void main(String[] args) {
         int[] array = {5, 3, 1, 4, 2};
-        mergeSort(array, 0, array.length - 1);
-        System.out.println(Arrays.toString(array));
+        String[] arrayString = {"Brian", "Alice", "David", "Cashew", "Eve", "Walnut"};
+        mergeSort(arrayString, 0, arrayString.length - 1);
+        System.out.println(Arrays.toString(arrayString));
     }
 
-    public static void mergeSort(int[] array, int left, int right) {
+    public static void mergeSort(String[] array, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
 
@@ -22,14 +23,14 @@ public class LinearithmicTime {
         }
     }
 
-    public static void merge(int[] array, int left, int mid, int right) {
+    public static void merge(String[] array, int left, int mid, int right) {
         // Find sizes of two subarrays to be merged
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
         // Create temporary arrays
-        int[] leftArray = new int[n1];
-        int[] rightArray = new int[n2];
+        String[] leftArray = new String[n1];
+        String[] rightArray = new String[n2];
 
         // Copy data to temporary arrays
         for (int i = 0; i < n1; ++i) {
@@ -47,7 +48,10 @@ public class LinearithmicTime {
         // Initial index of merged subarray array
         int k = left;
         while (i < n1 && j < n2) {
-            if (leftArray[i] <= rightArray[j]) {
+            int val = leftArray[i].compareTo(rightArray[j]);
+            //int val = rightArray[i].compareTo(leftArray[j]);
+            //if (leftArray[i] <= rightArray[j])
+            if (val <= 0) {
                 array[k] = leftArray[i];
                 i++;
             } else {
