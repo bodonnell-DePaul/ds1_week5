@@ -1,16 +1,53 @@
 package csc402.week5;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+
 
 public class LinearithmicTime {
     public static void main(String[] args) {
         int[] array = {5, 3, 1, 4, 2};
         String[] arrayString = {"Brian", "Alice", "David", "Cashew", "Eve", "Walnut"};
-        mergeSort(arrayString, 0, arrayString.length - 1);
-        System.out.println(Arrays.toString(arrayString));
+        ProfessionalSportsTeam[] teams = {
+                new ProfessionalSportsTeam("Bears", "Chicago", "Football"),
+                new ProfessionalSportsTeam("Cubs", "Chicago", "Baseball"),
+                new ProfessionalSportsTeam("White Sox", "Chicago", "Baseball"),
+                new ProfessionalSportsTeam("Bulls", "Chicago", "Basketball"),
+                new ProfessionalSportsTeam("Blackhawks", "Chicago", "Hockey"),
+                new ProfessionalSportsTeam("Fire", "Chicago", "Soccer")
+        };
+
+        //Bears
+        teams[0].setWins(5);
+        teams[0].setLosses(12);
+        //Cubs
+        teams[1].setWins(83);
+        teams[1].setLosses(79);
+        //White Sox
+        teams[2].setWins(41);
+        teams[2].setLosses(121);
+        //Bulls
+        teams[3].setWins(39);
+        teams[3].setLosses(43);
+        //Blackhawks
+        teams[4].setWins(23);
+        teams[4].setLosses(53);
+        //Fire
+        teams[5].setWins(7);
+        teams[5].setLosses(18);
+
+        // Sort the array
+        ArrayList easyWay = new ArrayList<ProfessionalSportsTeam>();
+        easyWay.addAll(Arrays.asList(teams));
+        Collections.sort(easyWay, new SportsTeamsComparator());
+
+        mergeSort(teams, 0, teams.length - 1);
+        System.out.println(Arrays.toString(teams));
     }
 
-    public static void mergeSort(String[] array, int left, int right) {
+    public static void mergeSort(ProfessionalSportsTeam[] array, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
 
@@ -23,14 +60,14 @@ public class LinearithmicTime {
         }
     }
 
-    public static void merge(String[] array, int left, int mid, int right) {
+    public static void merge(ProfessionalSportsTeam[] array, int left, int mid, int right) {
         // Find sizes of two subarrays to be merged
         int n1 = mid - left + 1;
         int n2 = right - mid;
 
         // Create temporary arrays
-        String[] leftArray = new String[n1];
-        String[] rightArray = new String[n2];
+        ProfessionalSportsTeam[] leftArray = new ProfessionalSportsTeam[n1];
+        ProfessionalSportsTeam[] rightArray = new ProfessionalSportsTeam[n2];
 
         // Copy data to temporary arrays
         for (int i = 0; i < n1; ++i) {
@@ -48,10 +85,16 @@ public class LinearithmicTime {
         // Initial index of merged subarray array
         int k = left;
         while (i < n1 && j < n2) {
-            int val = leftArray[i].compareTo(rightArray[j]);
+
+            double team1 = 0;
+            double team2 = 0;
+            team1 = leftArray[i].getWins() / (leftArray[i].getLosses() + leftArray[i].getWins());
+            team2 = rightArray[j].getWins() / (rightArray[j].getLosses() + rightArray[j].getWins());
+            //leftArray[i].compare(rightArray[j]);
             //int val = rightArray[i].compareTo(leftArray[j]);
             //if (leftArray[i] <= rightArray[j])
-            if (val <= 0) {
+
+            if (team1 <= team2) {
                 array[k] = leftArray[i];
                 i++;
             } else {
