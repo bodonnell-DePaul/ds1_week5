@@ -52,8 +52,11 @@ import java.util.Arrays;
 
 public class LogarithmicTime {
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 5};
-        int target = 4;
+        int[] array = new int[100];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = i + 1;
+        }
+        int target = 44;
         int index = binarySearch(array, target);
         if (index != -1) {
             System.out.println("Element found at index: " + index);
