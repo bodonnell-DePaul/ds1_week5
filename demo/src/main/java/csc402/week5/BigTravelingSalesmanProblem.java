@@ -3,7 +3,6 @@ package csc402.week5;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-//import csc402.week5.ProfessionalSportsTeam;
 
 public class BigTravelingSalesmanProblem {
     public static void main(String[] args) {
@@ -68,63 +67,63 @@ public class BigTravelingSalesmanProblem {
         System.out.println("Distance from Chicago, IL to Los Angeles, CA: " + distanceMatrix.getDistance("Chicago, IL", "Los Angeles, CA") + " miles");
         System.out.println("Distance from New York, NY to Miami, FL: " + distanceMatrix.getDistance("New York, NY", "Miami, FL") + " miles");
 
-        // Calculate the shortest distance between each location and 5 of the other cities
+        // Calculate the shortest and longest distances to visit all the cities
         List<String> cities = Arrays.asList("Chicago, IL", "Los Angeles, CA", "New York, NY", "Phoenix, AZ", "Boston, MA", "Miami, FL", "Philadelphia, PA", "Seattle, WA", "Atlanta, GA", "Denver, CO");
-        for (String city : cities) {
-            List<String> otherCities = new ArrayList<>(cities);
-            otherCities.remove(city);
-            //List<String> subset = otherCities.subList(0, 5);
-            double shortestDistance = calculateShortestDistance(city, otherCities, distanceMatrix);
-            System.out.println("Shortest distance from " + city + " to 5 other cities: " + shortestDistance + " miles");
-        }
+        double shortestDistance = calculateShortestDistance(cities, distanceMatrix);
+        System.out.println("Shortest distance to visit all cities: " + shortestDistance + " miles");
     }
-   
-    public static double calculateShortestDistance(String startCity, List<String> cities, DistanceMatrix distanceMatrix) {
-        List<Integer> bestRoute = new ArrayList<>();
+
+    public static double calculateShortestDistance(List<String> cities, DistanceMatrix distanceMatrix) {
+        List<String> bestRoute = new ArrayList<>();
+        List<String> worstRoute = new ArrayList<>();
         double[] minDistance = {Double.MAX_VALUE};
+        double[] maxDistance = {Double.MIN_VALUE};
 
-        List<Integer> currentRoute = new ArrayList<>();
-        for (int i = 0; i < cities.size(); i++) {
-            currentRoute.add(i);
-        }
+        permute(cities, 0, distanceMatrix, bestRoute, worstRoute, minDistance, maxDistance);
 
-        permute(currentRoute, 0, cities, distanceMatrix, bestRoute, minDistance, startCity);
-
+        System.out.println("Best route: " + bestRoute + " Distance: " + minDistance[0] + " miles");
+        System.out.println("Worst route: " + worstRoute + " Distance: " + maxDistance[0] + " miles");
         return minDistance[0];
     }
 
-    public static void permute(List<Integer> route, int start, List<String> cities, DistanceMatrix distanceMatrix, List<Integer> bestRoute, double[] minDistance, String startCity) {
+    public static void permute(List<String> route, int start, DistanceMatrix distanceMatrix, List<String> bestRoute, List<String> worstRoute, double[] minDistance, double[] maxDistance) {
         if (start == route.size() - 1) {
-            double currentDistance = calculateTotalDistance(route, cities, distanceMatrix, startCity);
+            double currentDistance = calculateTotalDistance(route, distanceMatrix);
+            //System.out.println("Current route: " + route + " Distance: " + currentDistance + " miles");
             if (currentDistance < minDistance[0]) {
                 minDistance[0] = currentDistance;
                 bestRoute.clear();
                 bestRoute.addAll(route);
             }
+            if (currentDistance > maxDistance[0]) {
+                maxDistance[0] = currentDistance;
+                worstRoute.clear();
+                worstRoute.addAll(route);
+            }
         } else {
             for (int i = start; i < route.size(); i++) {
                 swap(route, start, i);
-                permute(route, start + 1, cities, distanceMatrix, bestRoute, minDistance, startCity);
+                permute(route, start + 1, distanceMatrix, bestRoute, worstRoute, minDistance, maxDistance);
                 swap(route, start, i);
             }
         }
     }
 
-    public static void swap(List<Integer> route, int i, int j) {
-        int temp = route.get(i);
+    public static void swap(List<String> route, int i, int j) {
+        String temp = route.get(i);
         route.set(i, route.get(j));
         route.set(j, temp);
     }
 
-    public static double calculateTotalDistance(List<Integer> route, List<String> cities, DistanceMatrix distanceMatrix, String startCity) {
+    public static double calculateTotalDistance(List<String> route, DistanceMatrix distanceMatrix) {
         double totalDistance = 0;
-        String currentCity = startCity;
-        for (int i = 0; i < route.size(); i++) {
-            String nextCity = cities.get(route.get(i));
+        String currentCity = route.get(0);
+        for (int i = 1; i < route.size(); i++) {
+            String nextCity = route.get(i);
             totalDistance += distanceMatrix.getDistance(currentCity, nextCity);
             currentCity = nextCity;
         }
-        totalDistance += distanceMatrix.getDistance(currentCity, startCity); // Return to the starting point
+        totalDistance += distanceMatrix.getDistance(currentCity, route.get(0)); // Return to the starting point
         return totalDistance;
     }
 }
