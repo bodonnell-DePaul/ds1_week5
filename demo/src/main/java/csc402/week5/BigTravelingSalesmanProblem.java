@@ -74,17 +74,23 @@ public class BigTravelingSalesmanProblem {
     }
 
     public static double calculateShortestDistance(List<String> cities, DistanceMatrix distanceMatrix) {
-        List<String> bestRoute = new ArrayList<>();
-        List<String> worstRoute = new ArrayList<>();
-        double[] minDistance = {Double.MAX_VALUE};
-        double[] maxDistance = {Double.MIN_VALUE};
+        
+        double retVal = -1;
+        for(int i = 0; i < cities.size(); i++)
+        {
+            List<String> bestRoute = new ArrayList<>();
+            List<String> worstRoute = new ArrayList<>();
+            double[] minDistance = {Double.MAX_VALUE};
+            double[] maxDistance = {Double.MIN_VALUE};
 
-        permute(cities, 0, distanceMatrix, bestRoute, worstRoute, minDistance, maxDistance);
+            permute(cities, i, distanceMatrix, bestRoute, worstRoute, minDistance, maxDistance);
 
-        System.out.println("Best route: " + bestRoute + " Distance: " + minDistance[0] + " miles");
-        System.out.println("Worst route: " + worstRoute + " Distance: " + maxDistance[0] + " miles");
-        return minDistance[0];
-    }
+            System.out.println("Best route: " + bestRoute + " Distance: " + minDistance[0] + " miles");
+            System.out.println("Worst route: " + worstRoute + " Distance: " + maxDistance[0] + " miles");
+            retVal = minDistance[0];
+        }
+    return retVal;
+}
 
     public static void permute(List<String> route, int start, DistanceMatrix distanceMatrix, List<String> bestRoute, List<String> worstRoute, double[] minDistance, double[] maxDistance) {
         if (start == route.size() - 1) {
