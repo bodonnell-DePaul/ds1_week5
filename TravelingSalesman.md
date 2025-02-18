@@ -95,3 +95,17 @@ public class TravelingSalesmanProblem {
 #### Conclusion
 
 The naive approach to solving the TSP is computationally expensive and impractical for large numbers of cities due to its factorial time complexity. However, it serves as a good example of the challenges posed by NP-hard problems and the need for more efficient algorithms and heuristics to solve such problems in practice.
+
+
+| From/To          | Chicago, IL | Los Angeles, CA | New York, NY | Phoenix, AZ | Boston, MA | Miami, FL | Philadelphia, PA | Seattle, WA | Atlanta, GA | Denver, CO |
+|------------------|-------------|-----------------|--------------|-------------|------------|-----------|------------------|-------------|-------------|------------|
+| **Chicago, IL**  | -           | 2,015 miles     | 790 miles    | 1,750 miles | 980 miles  | 1,380 miles | 760 miles        | 2,060 miles | 715 miles   | 1,000 miles|
+| **Los Angeles, CA** | 2,015 miles | -             | 2,780 miles  | 370 miles   | 2,990 miles | 2,730 miles | 2,720 miles      | 1,130 miles | 2,180 miles | 1,010 miles|
+| **New York, NY** | 790 miles   | 2,780 miles     | -            | 2,460 miles | 215 miles  | 1,280 miles | 95 miles         | 2,860 miles | 860 miles   | 1,800 miles|
+| **Phoenix, AZ**  | 1,750 miles | 370 miles       | 2,460 miles  | -           | 2,890 miles | 2,330 miles | 2,300 miles      | 1,420 miles | 1,845 miles | 850 miles  |
+| **Boston, MA**   | 980 miles   | 2,990 miles     | 215 miles    | 2,890 miles | -          | 1,490 miles | 310 miles        | 3,070 miles | 1,075 miles | 1,950 miles|
+| **Miami, FL**    | 1,380 miles | 2,730 miles     | 1,280 miles  | 2,330 miles | 1,490 miles | -         | 1,220 miles      | 3,280 miles | 660 miles   | 2,060 miles|
+| **Philadelphia, PA** | 760 miles | 2,720 miles   | 95 miles     | 2,300 miles | 310 miles  | 1,220 miles | -                | 2,870 miles | 800 miles   | 1,760 miles|
+| **Seattle, WA**  | 2,060 miles | 1,130 miles     | 2,860 miles  | 1,420 miles | 3,070 miles | 3,280 miles | 2,870 miles      | -           | 2,640 miles | 1,300 miles|
+| **Atlanta, GA**  | 715 miles   | 2,180 miles     | 860 miles    | 1,845 miles | 1,075 miles | 660 miles  | 800 miles        | 2,640 miles | -           | 1,400 miles|
+| **Denver, CO**   | 1,000 miles | 1,010 miles     | 1,800 miles  | 850 miles   | 1,950 miles | 2,060 miles | 1,760 miles      | 1,300 miles | 1,400 miles | -          |

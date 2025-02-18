@@ -43,4 +43,9 @@ public class ProfessionalSportsTeam {
     public double getLosses() {
         return losses;
     }
+
+    @Override
+    public String toString() {
+        return "Team: " + name + ", City: " + city + ", Sport: " + sport;
+    }
 }
