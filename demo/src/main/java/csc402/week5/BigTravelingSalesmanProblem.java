@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 //import csc402.week5.ProfessionalSportsTeam;
 
-public class TravelingSalesmanProblem {
+public class BigTravelingSalesmanProblem {
     public static void main(String[] args) {
         DistanceMatrix distanceMatrix = new DistanceMatrix();
 
@@ -73,8 +73,8 @@ public class TravelingSalesmanProblem {
         for (String city : cities) {
             List<String> otherCities = new ArrayList<>(cities);
             otherCities.remove(city);
-            List<String> subset = otherCities.subList(0, 5);
-            double shortestDistance = calculateShortestDistance(city, subset, distanceMatrix);
+            //List<String> subset = otherCities.subList(0, 5);
+            double shortestDistance = calculateShortestDistance(city, otherCities, distanceMatrix);
             System.out.println("Shortest distance from " + city + " to 5 other cities: " + shortestDistance + " miles");
         }
     }
