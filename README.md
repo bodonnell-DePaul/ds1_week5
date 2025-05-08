@@ -208,6 +208,7 @@ public class ExponentialTime {
     }
 }
 ```
+```shell
 fibonacci(5)
 ├── fibonacci(4)
 │   ├── fibonacci(3)
@@ -223,7 +224,7 @@ fibonacci(5)
     │   ├── fibonacci(1)
     │   └── fibonacci(0)
     └── fibonacci(1)
-    
+```    
 
 ### OR
 ```java
