@@ -290,6 +290,7 @@ public class FactorialTime {
     }
 }
 ```
+```shell
 permute("", "ABC")
 ├── permute("A", "BC")
 │   ├── permute("AB", "C")
@@ -306,3 +307,4 @@ permute("", "ABC")
     │   └── permute("CAB", "")
     └── permute("CB", "A")
         └── permute("CBA", "")
+```
