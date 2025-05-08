@@ -254,6 +254,7 @@ public class ExponentialTimeSubsetSum {
     }
 }
 ```
+```shell
 isSubsetSum({3, 34, 4, 12, 5, 2}, 6, 9)
 ├── isSubsetSum({3, 34, 4, 12, 5}, 5, 9)
 │   ├── isSubsetSum({3, 34, 4, 12}, 4, 9)
@@ -265,6 +266,7 @@ isSubsetSum({3, 34, 4, 12, 5, 2}, 6, 9)
 │   │   └── isSubsetSum({3, 34, 4}, 3, 5)
 │   └── isSubsetSum({3, 34, 4, 12}, 4, 4)
 └── isSubsetSum({3, 34, 4, 12, 5}, 5, 4)
+```
 
 ### O(n!) - Factorial Time Complexity
 An algorithm with factorial time complexity is often seen in problems involving permutations.
